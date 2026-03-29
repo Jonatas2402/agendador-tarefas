@@ -23,7 +23,7 @@ public class TarefaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<TarefaDTO>> listarTarefas(@RequestParam("email") String token){
+    public ResponseEntity<List<TarefaDTO>> listarTarefas(@RequestHeader("Authorization") String token){
         List<TarefaDTO> tarefas = service.buscarPorEmail(token);
         return ResponseEntity.ok(tarefas);
     }
