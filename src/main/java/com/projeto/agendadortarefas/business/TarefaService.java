@@ -4,6 +4,7 @@ import com.projeto.agendadortarefas.business.dto.TarefaDTO;
 import com.projeto.agendadortarefas.business.mapper.TarefaConverter;
 import com.projeto.agendadortarefas.infrastructure.entity.TarefaEntity;
 import com.projeto.agendadortarefas.infrastructure.enums.StatusNotificacaoEnum;
+import com.projeto.agendadortarefas.infrastructure.exceptions.ResourceNotFoundException;
 import com.projeto.agendadortarefas.infrastructure.repository.TarefaRepository;
 import com.projeto.agendadortarefas.infrastructure.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
@@ -34,5 +35,14 @@ public class TarefaService {
         List<TarefaEntity> listaTarefas = repository.findByEmailUsuario(email);
 
         return tarefaConverter.paraListaTarefasDTO(listaTarefas);
+    }
+    public void  deletarTarefaPorId(String id){
+        try{
+            repository.deleteById(id);
+        } catch (ResourceNotFoundException e) {
+            throw new RuntimeException("Erro ao deletar tarefa pelo id, id inexistente" + id,
+                    e.getCause());
+        }
+
     }
 }

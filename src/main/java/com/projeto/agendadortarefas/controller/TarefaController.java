@@ -27,4 +27,9 @@ public class TarefaController {
         List<TarefaDTO> tarefas = service.buscarPorEmail(token);
         return ResponseEntity.ok(tarefas);
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarTarefa(@PathVariable("id") String id){
+        service.deletarTarefaPorId(id);
+        return ResponseEntity.ok().build();
+    }
 }
