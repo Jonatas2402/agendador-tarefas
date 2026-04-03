@@ -17,18 +17,19 @@ public class TarefaController {
 
     @PostMapping
     public ResponseEntity<TarefaDTO> salvaTarefa(@RequestBody TarefaDTO dto,
-                                                 @RequestHeader("Authorization") String token){
+                                                 @RequestHeader("Authorization") String token) {
 
         return ResponseEntity.ok(service.salvaTarefa(token, dto));
     }
 
     @GetMapping
-    public ResponseEntity<List<TarefaDTO>> listarTarefas(@RequestHeader("Authorization") String token){
+    public ResponseEntity<List<TarefaDTO>> listarTarefas(@RequestHeader("Authorization") String token) {
         List<TarefaDTO> tarefas = service.buscarPorEmail(token);
         return ResponseEntity.ok(tarefas);
     }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarTarefa(@PathVariable("id") String id){
+    public ResponseEntity<Void> deletarTarefa(@PathVariable("id") String id) {
         service.deletarTarefaPorId(id);
         return ResponseEntity.ok().build();
     }

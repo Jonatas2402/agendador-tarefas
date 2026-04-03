@@ -20,7 +20,7 @@ public class TarefaService {
     private final TarefaConverter tarefaConverter;
     private final JwtUtil jwtUtil;
 
-    public TarefaDTO salvaTarefa(String token, TarefaDTO dto){
+    public TarefaDTO salvaTarefa(String token, TarefaDTO dto) {
         String email = jwtUtil.extrairEmailDoToken(token.substring(7));
         dto.setDataCriacao(LocalDateTime.now());
         dto.setStatusNotificacao(StatusNotificacaoEnum.PENDENTE);
@@ -30,19 +30,16 @@ public class TarefaService {
                 repository.save(entity));
     }
 
-    public List<TarefaDTO> buscarPorEmail(String token){
+    public List<TarefaDTO> buscarPorEmail(String token) {
         String email = jwtUtil.extrairEmailDoToken(token.substring(7));
         List<TarefaEntity> listaTarefas = repository.findByEmailUsuario(email);
 
         return tarefaConverter.paraListaTarefasDTO(listaTarefas);
     }
-    public void  deletarTarefaPorId(String id){
-        try{
-            repository.deleteById(id);
-        } catch (ResourceNotFoundException e) {
-            throw new RuntimeException("Erro ao deletar tarefa pelo id, id inexistente" + id,
-                    e.getCause());
-        }
 
+    public void deletarTarefaPorId(String id) {
+        repository.deleteById(id);
     }
+
+    /*Próximos métodos buscar por périodo de tempo, update de tarefa*/
 }
