@@ -9,14 +9,14 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface TarefaConverter {
 
-    //Transforma em DTO
+    //Transforma en entidade
     TarefaEntity paraTarefaEntity(TarefaDTO dto);
 
-    //Transforma em entidade.
+    //Transforma em DTO.
     TarefaDTO paraTarefaDTO(TarefaEntity entity);
-    //Transforma em DTO
+    //Transforma em entidade
     List<TarefaEntity> paraListaTarefasEntity(List<TarefaDTO> dtos);
-    //Transforma em Entity
+    //Transforma em DTO
     List<TarefaDTO> paraListaTarefasDTO(List<TarefaEntity> entities);
 }
 
